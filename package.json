@@ -1,0 +1,37 @@
+{
+  "name": "generator-wakanda-project",
+  "version": "0.0.1",
+  "description": "Wakanda Project Yeoman generator",
+  "license": "http://wakanda.org/license",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AMorgaut/generator-wakanda-project.git"
+  },
+  "author": {
+    "name": "Alexandre Morgaut",
+    "email": "alexandre.morgaut@gmail.com",
+    "url": "https://github.com/AMorgaut"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "wakanda",
+    "wakandadb",
+    "nosql",
+    "database"
+  ],
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.16.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.9.0"
+  },
+  "bugs": {
+    "url": "https://github.com/AMorgaut/generator-wakanda-project/issues"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
