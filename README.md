@@ -20,7 +20,7 @@ $ npm install -g yo
 
 ### What is Wakanda?
 
-bla bla 
+Wakanda Server and WakandaDB integrate of an HTTP server and a JavaScript engine on top of a fast NoSQL Object datastore to creates an unbeatable combination for accessing your relational data quickly with a strong business logic applied.
 
 
 ### Yeoman Generators
