@@ -1,0 +1,1 @@
+﻿{  "name": "<%= projectName %>",  "description": "<%= description %>",  "version": "0.0.1",  "engines": {    "wakanda": ">=8.*"  },  "license": "http://wakanda.org/license",  "devDependencies": {    "grunt": "~0.4.5",    "grunt-open": "~0.2.2"  }}
