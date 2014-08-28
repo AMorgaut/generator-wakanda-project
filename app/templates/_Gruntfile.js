@@ -66,10 +66,10 @@ module.exports = function GruntfileModule(grunt) {
         options.debug = 'remote';
     }
 
-    serverOptions.push("--debugger=" + options.debug);
-
-    serverOptions.push('"' + options.solution + '"');
-
+    //serverOptions.push('-g:' + options.debug);
+    
+    serverOptions.push(options.solution);
+    
     grunt.util.spawn({
       cmd: options.server,
       args: serverOptions,
@@ -78,15 +78,20 @@ module.exports = function GruntfileModule(grunt) {
       done();
     });
 
-    grunt.task.run([
-      //'connect:livereload',
-      //'watch',
-      'open'
-    ]);
-
     process.on('end', function () {
       wakanda.kill();
-    })
+    });
+
+    setTimeout(function () {
+      grunt.log.writeln('');
+      grunt.log.writeln('run open');
+
+      grunt.task.run([
+        //'connect:livereload',
+        //'watch',
+        'open'
+      ]);
+    }, 4000);
 
   });
 };

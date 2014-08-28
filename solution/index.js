@@ -106,7 +106,7 @@ var WakandaProjectGenerator = yeoman.generators.NamedBase.extend({
     this.projects = this.answers.projects || this.options.projects;
 
     relativePath = path.relative(this.solutionRoot, this.projects);
-    this.projectNodes = '\n\t<project path="' + relativePath + '"/>';
+    this.projectNodes = '\n  <project path="' + relativePath + '"/>';
   },
 
   writing: {
