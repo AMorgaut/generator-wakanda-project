@@ -3,7 +3,7 @@ module.exports = function GruntfileModule(grunt) {
   var spawn = require('child_process').spawn;
   var fs = require('fs');
 
-  require('load-grunt-tasks')(grunt);
+  //require('load-grunt-tasks')(grunt);
 
   var WAKANDA_SERVER_PATH = '<%= serverPath %>';
   var WAKANDA_SOLUTION_PATH = grunt.file.readJSON('.solution').path;
@@ -32,10 +32,11 @@ module.exports = function GruntfileModule(grunt) {
       }
     },
     open: {
-      options: {
-        serve: {
-          path: getURL,
-          app: 'Google Chrome'
+      serve: {
+        path: 'http://localhost:8081/rest/$catalog',
+        app: 'Google Chrome',
+        options: {
+          openOn: 'serverListening'
         }
       }
     },
@@ -45,7 +46,7 @@ module.exports = function GruntfileModule(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-open');
-  grunt.loadNpmTasks('grunt-reload-chrome');
+  //grunt.loadNpmTasks('grunt-reload-chrome');
 
   // Default task(s).
   // grunt.registerTask('default', ['uglify']);
@@ -57,9 +58,6 @@ module.exports = function GruntfileModule(grunt) {
 
     var serverOptions = [];
     var options = grunt.config.data.serve.options;
-    var command;
-    var url;
-    var wakanda;
 
     // Launch the server
     if (['remote', 'wakanda', 'none'].indexOf(options.debug) === -1) {
@@ -78,19 +76,9 @@ module.exports = function GruntfileModule(grunt) {
       done();
     });
 
-    process.on('end', function () {
-      wakanda.kill();
-    });
-
     setTimeout(function () {
-      grunt.log.writeln('');
       grunt.log.writeln('run open');
-
-      grunt.task.run([
-        //'connect:livereload',
-        //'watch',
-        'open'
-      ]);
+      grunt.event.emit('serverListening'); 
     }, 4000);
 
   });

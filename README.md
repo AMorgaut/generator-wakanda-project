@@ -1,6 +1,6 @@
 # generator-wakanda-project 
-[![Build Status](https://secure.travis-ci.org/AMorgaut/generator-wakanda-project.png?branch=master)](https://travis-ci.org/AMorgaut/generator-wakanda-project)
 [![NPM version](https://badge.fury.io/js/generator-wakanda-project.svg)](http://badge.fury.io/js/generator-wakanda-project)
+[![Build Status](https://secure.travis-ci.org/AMorgaut/generator-wakanda-project.png?branch=master)](https://travis-ci.org/AMorgaut/generator-wakanda-project)
 
 > [Yeoman](http://yeoman.io) [Wakanda](http://wakanda.org) Project generator
 

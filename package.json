@@ -1,6 +1,6 @@
 {
   "name": "generator-wakanda-project",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Wakanda Project Yeoman generator",
   "keywords": [
     "yeoman-generator",
