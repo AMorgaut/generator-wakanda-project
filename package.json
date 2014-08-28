@@ -1,6 +1,6 @@
 {
   "name": "generator-wakanda-project",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Wakanda Project Yeoman generator",
   "keywords": [
     "yeoman-generator",
@@ -9,7 +9,7 @@
     "nosql",
     "database"
   ],
-  "license": "http://wakanda.org/license",
+  "license": "MIT",
   "main": "app/index.js",
   "repository": {
     "type": "git",

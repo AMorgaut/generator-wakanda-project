@@ -39,7 +39,14 @@ It will create a project and a solution to run it
 grunt serve
 ```
 
-Will launch the solution on the Wakanda Server
+will launch the solution on the Wakanda Server
+
+```bash
+grunt open:catalog
+```
+
+will open the project catalog URL in Google Chrome
+
 
 ## TODO
 
