@@ -7,9 +7,9 @@
 
 ## About
 
-Wakanda Server and WakandaDB integrate of an HTTP server and a JavaScript engine on top of a fast NoSQL Object datastore to creates an unbeatable combination for accessing your relational data quickly with a strong business logic applied.
+Wakanda Server and WakandaDB integrate an HTTP server and a JavaScript engine on top of a fast NoSQL Object datastore to creates an unbeatable combination for accessing your relational data quickly with a strong business logic applied.
 
-This Yeoman generator create Wakanda projects and solutions you can then edit from any dev tools and provide a Grunt serve task to launch them on Wakanda server.
+This _unoficial_ Yeoman generator creates Wakanda projects and solutions you can then edit from any dev tools, and provides a Grunt serve task to launch them on Wakanda server.
 
 ## How to install
 

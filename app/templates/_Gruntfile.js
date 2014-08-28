@@ -33,11 +33,16 @@ module.exports = function GruntfileModule(grunt) {
     },
     open: {
       serve: {
-        path: 'http://localhost:8081/rest/$catalog',
+        path: 'http://localhost:8081/rest/%24catalog/',
         app: 'Google Chrome',
         options: {
           openOn: 'serverListening'
         }
+      },
+      catalog: {
+        path: 'http://localhost:8081/rest/%24catalog',
+        app: 'Google Chrome',
+        options: {}
       }
     },
     reload: {
@@ -68,18 +73,21 @@ module.exports = function GruntfileModule(grunt) {
     
     serverOptions.push(options.solution);
     
+    
+    timer = setTimeout(function () {
+        grunt.log.writeln('run open');
+        grunt.event.emit('serverListening');
+        grunt.task.run(['open:catalog']);
+        //task.async();
+    }, 3500);
+    
     grunt.util.spawn({
       cmd: options.server,
       args: serverOptions,
       opts: {stdio: 'inherit'}
-    }, function () {
+    }, function (error, result, code) {
       done();
     });
-
-    setTimeout(function () {
-      grunt.log.writeln('run open');
-      grunt.event.emit('serverListening'); 
-    }, 4000);
 
   });
 };
