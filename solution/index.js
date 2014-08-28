@@ -44,7 +44,7 @@ var WakandaProjectGenerator = yeoman.generators.NamedBase.extend({
   },
 
   initializing: function () {
-    this.log('You called the wakanda-project subgenerator with the argument ' + this.name + '.');
+    //this.log('You called the wakanda-project subgenerator with the argument ' + this.name + '.');
   },
 
   prompting: function () {
@@ -66,9 +66,25 @@ var WakandaProjectGenerator = yeoman.generators.NamedBase.extend({
         type    : 'input',
         name    : 'path',
         message : 'Path of your Solution folder?',
-        default: function (answers) {
+        default : function (answers) {
           return (answers.solutionName || generator.solutionName) + ' Solution' + path.sep;
         }
+      });
+    }
+
+    if (!this.options.projects) {
+      questions.push({
+        type    : 'input',
+        name    : 'addProjects',
+        message : 'Add projects to your solution?',
+        default : 'Y'
+      }, {
+        when    : function (answers) {
+          return answers.addProjects === 'Y';
+        },
+        type    : 'input',
+        name    : 'projects',
+        message : 'What is the project path?'
       });
     }
 
@@ -79,28 +95,38 @@ var WakandaProjectGenerator = yeoman.generators.NamedBase.extend({
   },
 
   configuring: function () {
+    var relativePath;
+
     if (this.answers.solutionName) {
       this.solutionName = this.answers.solutionName;
     }
-    this.solutionPath = this.options.path || this.answers.path;
+    this.solutionPath = this.answers.path || this.options.path;
     this.solutionRoot = this.baseRoot + path.sep + this.solutionPath;
     this.solutionFile = this.solutionRoot + this.solutionName + '.waSolution';
+    this.projects = this.answers.projects || this.options.projects;
+
+    relativePath = path.relative(this.solutionRoot, this.projects);
+    this.projectNodes = '\n\t<project path="' + relativePath + '"/>';
   },
 
   writing: {
     app: function () {
       this.log('Creating the solution');
-      this.destinationRoot(this.solutionRoot);
+      
+      this.template('_solution', '.solution');
 
       // todo: copy all file/folder from remote solution template? & apply engine on filenames too?
       // todo: support wakanda template files pattern (see issue https://github.com/yeoman/generator/issues/517)
-      this.src.copy('$(solutionName).waSolution', this.solutionName + '.waSolution');
+      this.template('$(solutionName).waSolution', this.solutionPath + this.solutionName + '.waSolution');
+      
+      this.destinationRoot(this.solutionRoot);
+
+      
       this.src.copy('Directory.waDirectory', 'Directory.waDirectory');
       this.src.copy('Settings.waSettings', 'Settings.waSettings');
 
       this.destinationRoot(this.baseRoot);
 
-      this.template('_solution', '.solution');
     },
 
     projectfiles: function () {
@@ -115,17 +141,24 @@ var WakandaProjectGenerator = yeoman.generators.NamedBase.extend({
   },
 
   addProjectToSolution: function () {
-    var solutionPath, solutionDir, relativePath, content;
+    /*
+    var relativePath, content;
 
-    if (this.options.projects) {
+    if (!this.projects) {
       return;
     }
-
-    relativePath = path.relative(this.solutionPath, this.options.projects);
+    
+    debugger;
+    this.log('add to solution: ' + this.solutionFile);
+    
+    relativePath = path.relative(this.solutionRoot, this.projects);
     content = '\n\t<project path="' + relativePath + '"/>';
-
-    this.append(this.solutionFile, 'solution', content);
+    this.log('solution content to add:\n' + content);
+    
+    content = this.append(this.solutionFile, 'solution', content);
+    this.log('new solution content:\n' + content);
     this.write(this.solutionFile, content);
+    */
   },
 
   end: function () {

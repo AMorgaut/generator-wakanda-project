@@ -61,44 +61,22 @@ module.exports = function GruntfileModule(grunt) {
     var url;
     var wakanda;
 
-
     // Launch the server
     if (['remote', 'wakanda', 'none'].indexOf(options.debug) === -1) {
         options.debug = 'remote';
     }
 
-    serverOptions.push("--debugger:" + options.debug);
+    serverOptions.push("--debugger=" + options.debug);
 
     serverOptions.push('"' + options.solution + '"');
-
-    grunt.log.writeln('Started wakanda server on ' + PROJECT_BASE_URL);
-
-    command = options.server;
-
-    debugger;
-
-    if (command.indexOf(' ') > -1) {
-      fs.linkSync(command, process.cwd() + '/wakandaServer');
-      command = process.cwd() + '/wakandaServer';
-    }
-
-
-    grunt.log.writeln(command, serverOptions);
 
     grunt.util.spawn({
       cmd: options.server,
       args: serverOptions,
       opts: {stdio: 'inherit'}
+    }, function () {
+      done();
     });
-    /*
-    wakanda = spawn(
-      command,
-      serverOptions,
-      {stdio: 'inherit'}
-    );
-    */
-
-    //grunt.log.write('wakanda pid:', wakanda.pid);
 
     grunt.task.run([
       //'connect:livereload',

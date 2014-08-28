@@ -255,7 +255,7 @@ var WakandaProjectGenerator = yeoman.generators.Base.extend({
 
   end: function () {
     this.installDependencies();
-    installDestDependencies.call(this, this.projectRoot);
+    //installDestDependencies.call(this, this.projectRoot);
   }
 });
 
