@@ -9,15 +9,24 @@ module.exports = function GruntfileModule(grunt) {
   var WAKANDA_SOLUTION_PATH = grunt.file.readJSON('.solution').path;
   var PROJECT_BASE_URL = 'http://localhost:8081';
 
+  function escapeShellArg(arg) {
+    ['\\', '$', '`'].forEach(function (char) {
+      arg = arg.split(char).join('\\' + char);
+    })
+    return arg;
+  }
+
   function getURL() {
     var path;
 
-    if (grunt.options('catalog')) {
+    if (grunt.option('catalog')) {
       path = '/rest/$catalog';
+    } else if (grunt.option('dataclass')) {
+      path = '/rest/' + grunt.option('dataclass');
     } else {
       path = '/';
     }
-    return PROJECT_BASE_URL + path;
+    return PROJECT_BASE_URL + escapeShellArg(path);
   }
 
   // Project configuration.
@@ -32,17 +41,20 @@ module.exports = function GruntfileModule(grunt) {
       }
     },
     open: {
+      'default': {
+        path: getURL,
+        app: 'Google Chrome'
+      },
       serve: {
-        path: 'http://localhost:8081/rest/%24catalog/',
+        path: getURL,
         app: 'Google Chrome',
         options: {
           openOn: 'serverListening'
         }
       },
       catalog: {
-        path: 'http://localhost:8081/rest/%24catalog',
-        app: 'Google Chrome',
-        options: {}
+        path: 'http://localhost:8081/rest/\\$catalog/',,
+        app: 'Google Chrome'
       }
     },
     reload: {
@@ -54,7 +66,7 @@ module.exports = function GruntfileModule(grunt) {
   //grunt.loadNpmTasks('grunt-reload-chrome');
 
   // Default task(s).
-  // grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['serve']);
 
   // first version of wakanda "serve" task defined inline
   grunt.registerTask('serve', 'launch current solution on local wakanda server', function () {
@@ -73,12 +85,12 @@ module.exports = function GruntfileModule(grunt) {
     
     serverOptions.push(options.solution);
     
-    
-    timer = setTimeout(function () {
-        grunt.log.writeln('run open');
-        grunt.event.emit('serverListening');
-        grunt.task.run(['open:catalog']);
-        //task.async();
+    timer = setTimeout(function () 
+      grunt.log.writeln('Trying to run "open"');
+      grunt.log.writeln('If the page doesn\'t open in the browser, run "grunt open:catalog" in another process');
+      grunt.event.emit('serverListening'); // should be enough to run "open:serve"
+      grunt.task.run(['open']); // try running manually "open --catalog" instead
+      //task.async();
     }, 3500);
     
     grunt.util.spawn({

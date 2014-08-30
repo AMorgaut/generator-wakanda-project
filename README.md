@@ -2,7 +2,7 @@
 [![NPM version](https://badge.fury.io/js/generator-wakanda-project.svg)](http://badge.fury.io/js/generator-wakanda-project)
 [![Build Status](https://secure.travis-ci.org/AMorgaut/generator-wakanda-project.png?branch=master)](https://travis-ci.org/AMorgaut/generator-wakanda-project)
 
-> [Yeoman](http://yeoman.io) [Wakanda](http://wakanda.org) Project generator
+> [Wakanda](http://wakanda.org) Project [Yeoman](http://yeoman.io) generator
 
 
 ## About
@@ -42,10 +42,16 @@ grunt serve
 will launch the solution on the Wakanda Server
 
 ```bash
-grunt open:catalog
+grunt open --catalog
 ```
 
 will open the project catalog URL in Google Chrome
+
+```bash
+grunt open --dataclass=Product
+```
+
+will open the the description of your Product Wakanda Dataclass in Google Chrome
 
 
 ## TODO
