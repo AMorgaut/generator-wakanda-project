@@ -21,8 +21,10 @@ module.exports = function GruntfileModule(grunt) {
 
     if (grunt.option('catalog')) {
       path = '/rest/$catalog';
-    } else if (grunt.option('dataclass')) {
-      path = '/rest/' + grunt.option('dataclass');
+    } else if (grunt.option('class')) {
+      path = '/rest/$catalog/' + grunt.option('class');
+    } else if (grunt.option('data')) {
+      path = '/rest/' + grunt.option('data');
     } else {
       path = '/';
     }
@@ -41,20 +43,12 @@ module.exports = function GruntfileModule(grunt) {
       }
     },
     open: {
-      'default': {
-        path: getURL,
-        app: 'Google Chrome'
-      },
       serve: {
         path: getURL,
         app: 'Google Chrome',
         options: {
-          openOn: 'serverListening'
+          //openOn: 'serverListening'
         }
-      },
-      catalog: {
-        path: 'http://localhost:8081/rest/\\$catalog/',,
-        app: 'Google Chrome'
       }
     },
     reload: {
@@ -75,6 +69,7 @@ module.exports = function GruntfileModule(grunt) {
 
     var serverOptions = [];
     var options = grunt.config.data.serve.options;
+    var openTaskArgs = ['open:serve'].concat(grunt.option.flags());
 
     // Launch the server
     if (['remote', 'wakanda', 'none'].indexOf(options.debug) === -1) {
@@ -85,14 +80,6 @@ module.exports = function GruntfileModule(grunt) {
     
     serverOptions.push(options.solution);
     
-    timer = setTimeout(function () 
-      grunt.log.writeln('Trying to run "open"');
-      grunt.log.writeln('If the page doesn\'t open in the browser, run "grunt open:catalog" in another process');
-      grunt.event.emit('serverListening'); // should be enough to run "open:serve"
-      grunt.task.run(['open']); // try running manually "open --catalog" instead
-      //task.async();
-    }, 3500);
-    
     grunt.util.spawn({
       cmd: options.server,
       args: serverOptions,
@@ -100,6 +87,23 @@ module.exports = function GruntfileModule(grunt) {
     }, function (error, result, code) {
       done();
     });
+
+    // Todo: inspect wakanda server stdout instead to know when server is ready
+    setTimeout(function () {
+      grunt.log.writeln('Running "open" task');
+      grunt.log.writeln('args: ' + grunt.option.flags());
+      // Only solution found ATM to prevent auto async/done
+      grunt.util.spawn({
+        cmd: 'grunt',
+        args: openTaskArgs,
+        opts: {
+          stdout: function (data) {
+            grunt.log.write('open' + data);
+          }
+        }
+      }, function (error, result, code) {
+      });
+    }, 3500);
 
   });
 };

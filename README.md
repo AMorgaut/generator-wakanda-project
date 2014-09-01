@@ -48,15 +48,21 @@ grunt open --catalog
 will open the project catalog URL in Google Chrome
 
 ```bash
-grunt open --dataclass=Product
+grunt open --class=Product
 ```
 
-will open the the description of your Product Wakanda Dataclass in Google Chrome
+will open the description of your Product Wakanda Dataclass in Google Chrome
+
+```bash
+grunt open --data=Product
+```
+
+will open the data URL of your Product Wakanda Dataclass in Google Chrome
 
 
 ## TODO
 
-* Make open work to launch the project catalog / pages in the browser
+* Find better way to make open not stop the server
 * Make Wakanda server parameters work to handle the debug mode
-* Watch Wakanda server files and reload when required
-* Make unit tests work correctly with arguments and prompt
+* Watch Wakanda server files and reload when required with via 'grunt-reload-chrome'
+* Make unit tests work correctly handle withArgs() and withPrompt()
