@@ -27,42 +27,58 @@ npm install -g generator-wakanda-project
 
 ## How to use
 
-Initiate the generator
+### Project generator
+
+This generator will create a project and a solution to run it
+To Initiate the generator, do:
 
 ```bash
 yo wakanda-project [appName]
 ```
 
-It will create a project and a solution to run it
+
+## Serve Task
+
+The "serve" thsk will launch the solution on the Wakanda Server and run the "open" task. To run it you'll do:
 
 ```bash
 grunt serve
 ```
 
-will launch the solution on the Wakanda Server
+Note that the "serve" task flags are all sent to the "open" task it invokes. You can then do directly:
 
+```bash
+grunt serve --catalog
+```
+
+## Open Task
+
+The "open" will as expected open an URL in the browser that, from the generated `Gruntfile.js` will be selected to be  "Google Chrome" (The goal is to be used in combination with "google-chrome-reload" and "watch"). This option is easy to change in Gruntfile.js.
+
+### Show the project catalog [JSON]
 ```bash
 grunt open --catalog
 ```
 
-will open the project catalog URL in Google Chrome
+### Show a Dataclass description [JSON]
+
+Shows the description of its attributes and methods
 
 ```bash
 grunt open --class=Product
 ```
 
-will open the description of your Product Wakanda Dataclass in Google Chrome
+### Show data objects from a specific Dataclass [JSON]
 
 ```bash
 grunt open --data=Product
 ```
 
-will open the data URL of your Product Wakanda Dataclass in Google Chrome
-
 
 ## TODO
 
 * Find better way to make open not stop the server
+* Make Grunt work with multiple projects
 * Make Wakanda server parameters work to handle the debug mode
 * Watch Wakanda server files and reload when required with via 'grunt-reload-chrome'
 * Make unit tests work correctly handle withArgs() and withPrompt()
