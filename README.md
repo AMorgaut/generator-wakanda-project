@@ -1,6 +1,9 @@
 # generator-wakanda-project 
+[![MIT Licensed](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](#license)
 [![NPM version](https://badge.fury.io/js/generator-wakanda-project.svg)](http://badge.fury.io/js/generator-wakanda-project)
 [![Build Status](https://secure.travis-ci.org/AMorgaut/generator-wakanda-project.png?branch=master)](https://travis-ci.org/AMorgaut/generator-wakanda-project)
+
+*Wakanda® and 4D® are registered trademarks of 4D SAS in France and/or other countries. All other names mentioned may be trademarks or registered trademarks of their respective owners.*
 
 > [Wakanda](http://wakanda.org) Project [Yeoman](http://yeoman.io) generator
 
@@ -13,13 +16,24 @@ This _unoficial_ Yeoman generator creates Wakanda projects and solutions you can
 
 ## How to install
 
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+#### Install npm
+Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository, so first: 
+
+[Super easy npm install](https://www.npmjs.org/doc/README.html#super-easy-install)
+
+#### Install Yeoman
+
+Next, you only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
 
 ```bash
 npm install -g yo
 ```
 
-To install generator-wakanda-project from npm, run:
+#### Yeoman Generators
+
+Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension. In the Wakanda serie, you might also be interested by the [Wakanda Extension](https://github.com/amorgaut/generator-wakanda-extension) and  [Wakanda Widget](https://github.com/midrissi/generator-wakanda-widget) generators.
+
+To install the *Wakanda Project* generator from npm, run:
 
 ```bash
 npm install -g generator-wakanda-project
@@ -77,8 +91,8 @@ grunt open --data=Product
 
 ## TODO
 
-* Find better way to make open not stop the server
+* Find better way to make open not stop the server using the [grunt-wakanda](https://github.com/AMorgaut/grunt-wakanda) plugin
 * Make Grunt work with multiple projects
-* Make Wakanda server parameters work to handle the debug mode
+* Make Wakanda server parameters work to handle the debug mode (using [grunt-wakanda](https://github.com/AMorgaut/grunt-wakanda))
 * Watch Wakanda server files and reload when required with via 'grunt-reload-chrome'
 * Make unit tests work correctly handle withArgs() and withPrompt()
